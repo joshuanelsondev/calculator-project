@@ -1,0 +1,29 @@
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#calculator {
+    display: grid;
+    background-color: transparent;
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: minmax(100px, auto) repeat(5, 50px);
+    /* border: 10px solid rgba(219, 219, 219, 0.603); */
+    /* border-style: groove; */
+   position: absolute;
+    
+}
+
+#borderImage {
+    border: 100px solid transparent;
+    border-image: url(apple-iphone-11-medium.png) 100 round;
+    width: 10em;
+    height: 30em;
+    position: relative;
+}
+
+#display {
+    grid-column: 1 / -1;
+}
+
