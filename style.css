@@ -59,7 +59,11 @@ h1 {
 }
 
 img {
-    color: white;
+    width: 16px;
+    position: absolute;
+    top: -66px;
+    right: -30px;
+    filter: invert(1);
 }
 
 #display {
