@@ -7,35 +7,40 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
     <link rel="iphone" href="apple-iphone-11-medium.png">
+    <link rel="battery" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body onload="time()">
+    <h1>Calculatr</h1>
     <div id="container">
-        <p id="borderImage"></p>
-        <div id="calculator">
-            <div id="display">0</div>
-            <button class="clearAll">AC</button>
-            <button class="delete">C</button>
-            <button class="positveNegative">+/-</button>
-            <button class="percent">%</button>
-            <button class="operand">7</button>
-            <button class="operand">8</button>
-            <button class="operand">9</button>
-            <button class="operator">÷</button>
-            <button class="operand">4</button>
-            <button class="operand">5</button>
-            <button class="operand">6</button>
-            <button class="operator">×</button>
-            <button class="operand">1</button>
-            <button class="operand">2</button>
-            <button class="operand">3</button>
-            <button class="operator">-</button>
-            <button class="operand">0</button>
-            <button class="decimal">.</button>
-            <button class="operator">=</button>
-            <button class="operator">+</button>
-        </div>
-        </p>
-        
+        <div id="borderImage">
+            <i class='fa fa-battery' style='color: white'></i>
+            <div id="time"></div>
+            <div id="calculator">   
+                <div id="display">0</div>
+                <div id="buttonContainer">
+                    <button class="clearAll">AC</button>
+                    <button class="delete">C</button>
+                    <button class="positiveNegative">+/-</button>
+                    <button class="operator">÷</button>
+                    <button class="operand">7</button>
+                    <button class="operand">8</button>
+                    <button class="operand">9</button>
+                    <button class="operator">×</button>
+                    <button class="operand">4</button>
+                    <button class="operand">5</button>
+                    <button class="operand">6</button>
+                    <button class="operator">-</button>
+                    <button class="operand">1</button>
+                    <button class="operand">2</button>
+                    <button class="operand">3</button>
+                    <button class="operator">+</button>
+                    <button class="operand">0</button>
+                    <button class="decimal">.</button>
+                    <button class="percent">%</button>
+                    <button class="operator">=</button>
+                </div>
+            </div>
+        </div>  
     </div>
     
 

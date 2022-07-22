@@ -1,29 +1,106 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: #D4D4D2;
+    text-align: center;
+}
+
 #container {
     display: flex;
     justify-content: center;
-    align-items: center;
-}
-
-#calculator {
-    display: grid;
-    background-color: transparent;
-    grid-template-columns: repeat(4, 50px);
-    grid-template-rows: minmax(100px, auto) repeat(5, 50px);
-    /* border: 10px solid rgba(219, 219, 219, 0.603); */
-    /* border-style: groove; */
-   position: absolute;
     
 }
 
-#borderImage {
+#borderImage { 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
     border: 100px solid transparent;
     border-image: url(apple-iphone-11-medium.png) 100 round;
     width: 10em;
     height: 30em;
     position: relative;
+    background-color: black;
+}
+
+#calculator {
+    display: flex;
+    position: absolute;
+    height: 33em;
+    width: 17em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+
+#buttonContainer {
+    display: grid;
+    background-color: transparent;
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: repeat(5, 50px);
+    align-content: space-around;
+    justify-content: space-evenly;
+    width: 20em;
+    height: 23em;
+}
+
+#time {
+    position: absolute;
+    top: -14%;
+    left: -28%;
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+}
+
+img {
+    color: white;
 }
 
 #display {
     grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: inherit;
+    height: auto;
+    font-size: 4em;
+    font-family: system-ui, sans-serif;
+    font-weight: 200;
+    color: white;
+    
 }
 
+button {
+    margin: -5px;
+    border-radius: 50%;
+    border-style: none;
+}
+
+.clearAll, 
+.delete,
+.positiveNegative {
+    background-color: #D4D4D2;
+    color: black;
+    font-size: 25px;
+}
+
+.operator {
+    background-color: #FF9500;
+    color: white;
+    font-size: 40px;
+    font-family: serif;
+}
+
+.operand,
+.decimal,
+.percent {
+    background-color: #505050;
+    color: white;
+    font-size: 25px;
+}
