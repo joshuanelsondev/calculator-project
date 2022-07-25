@@ -63,7 +63,7 @@ img {
     position: absolute;
     top: -66px;
     right: -30px;
-    filter: invert(1);
+    
 }
 
 #display {
@@ -84,6 +84,7 @@ button {
     margin: -5px;
     border-radius: 50%;
     border-style: none;
+    font-family: Helvetica, sans-serif;
 }
 
 .clearAll, 
@@ -94,11 +95,21 @@ button {
     font-size: 25px;
 }
 
+.clearAll:hover,
+.delete:hover,
+.positiveNegative:hover {
+    background-color: #fbfbfb;
+}
+
 .operator {
     background-color: #FF9500;
     color: white;
-    font-size: 40px;
-    font-family: serif;
+    font-size: 30px;
+    
+}
+
+.operator:hover {
+    background-color: #ffbf65;
 }
 
 .operand,
@@ -107,4 +118,10 @@ button {
     background-color: #505050;
     color: white;
     font-size: 25px;
+}
+
+.operand:hover,
+.decimal:hover,
+.percent:hover {
+    background-color: #737373;
 }
