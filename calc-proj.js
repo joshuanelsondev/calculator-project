@@ -10,46 +10,54 @@ function time() {
     document.getElementById('time').innerHTML = time;
 }
 
-let displayValue = 0;
+
 const display = document.getElementById('display');
+const displayValue = 0;
+display.innerText = displayValue;
 const buttons = Array.from(document.querySelectorAll('button'));
 
 
-buttons.map(button => {
-    button.addEventListener('click', (e) => {
-        switch (e.target.value) {
-            case 'AC':
-                display.innerHTML = 0;
-                break;
-            case 
 
+updateDisplay = (e) => {
+    switch (e.target.value) {
+        case 'AC':
+            display.innerText = 0;
+            break;
+        case 'C':
+            if (display.innerText != '0'){
+                display.innerText = display.innerText.slice(0, -1);
+            }      
+            break;
+        case 'positiveNegative':
+            display.innerText = '-' + display.innerText;
+            break;
 
+        default:
+            switch (display.innerText) {
+                case '0':
+                    display.innerText = '';
+                    display.innerText += e.target.value;
+                    break;
+                default:
+                    display.innerText = e.target.value + display.innerText;
+            }
 
-            default:
-                display.innerHTML += e.target.value;
-        }
-    });
-}); 
+            if (display.innerText.length > 11) {
+                display.innerText = display.innerText.slice(0, -1);
+            } else if (display.innerText.length === 3 || display.innerText.length === 7) {
+                display.innerText = e.target.value + ',' + display.innerText;
+            }
 
-updateDisplay = () => {
-    
-    if(displayValue.length > 9) {
-        display.innerHTML = displayValue.substring(0,9);
-    }
-    if(displayValue != 0) {
-        display.innerHTML = displayValue;
-
-        
-    } else {
-        display.innerHTML = displayValue;
     }
 };
 
-updateDisplay();
+buttons.map(button => { button.addEventListener('click', updateDisplay); });
 
-clear = () => {
+// updateDisplay();
 
-};
+// clear = () => {
+
+// };
 
 
 
