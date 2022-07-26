@@ -14,12 +14,15 @@ class Calculator {
     constructor(previousNumber, currentNumber) {
         this.previousNumber = previousNumber;
         this.currentNumber = currentNumber;
+        this.clear();
+        display.innerText = 0;
     }
 
     clear() {
-        this.currentNumber = '';
-        this.previousNumber = '';
+        this.currentOperand = ''; 
+        this.previousOperand = '';
         this.operation = undefined;
+        
     }
 
     delete() {
@@ -27,26 +30,62 @@ class Calculator {
     }
 
     appendNumber(number) {
-            this.currentNumber = this.currentNumber.toString() + number.toString();
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        this.currentOperand = this.currentOperand.toString() + number.toString();
+        
 
     }
 
     chooseOperation(operation) {
+        // if (this.currentOperand === '') return;
+        // if (this.previousOperand !== '') {
+        //     this.compute();
+        // }
+        this.operation = operation;
+        this.previousOperand = this.currentOperand;
+        this.currentOperand = '';
+        display.innerText = this.previousOperand;
 
     }
 
     compute() {
 
+        let computation;
+        const prev = parseFloat(this.previousOperand);
+        const current = parseFloat(this.currentOperand);
+        if (isNaN(prev) || isNaN(current)) return;
+        switch (this.operation) {
+            case '+':
+                computation = prev + current;
+                break;
+            case '–':
+                computation = prev - current;
+                break;
+            case '×':
+                computation = prev * current;
+                break;
+            case '÷':
+                computation = prev / current;
+                break;
+            case '%':
+                computation = prev / 100;
+                break;
+            default:
+                return;
+        }
+        this.currentOperand = computation;
+        this.operation = undefined;
+        this.previousOperand = '';
     }
-
+  
     updateDisplay() {
-        this.currentNumber.innerText = this.currentNumber;
-
+        display.innerText = this.currentOperand;
+       
     }
 }
 
 
-
+ 
 
 const numberButtons = document.querySelectorAll(`[data-number]`);
 const operationButtons = document.querySelectorAll(`[data-operation]`);
@@ -56,6 +95,7 @@ const deleteButton = document.querySelector(`[data-delete]`);
 const negateButton = document.querySelector(`[data-negate]`);
 const previousNumber = document.querySelector(`[data-previousNumber]`);
 const currentNumber = document.querySelector(`[data-currentNumber]`);
+const display = document.getElementById('display');
 
 const calculator = new Calculator(previousNumber, currentNumber);
 
@@ -63,7 +103,51 @@ numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
+        if (display != 0) {
+            operationButtons.forEach(button => {
+                switch (button.innerText) {
+                    case '÷':
+                    case '×':
+                    case '–':
+                    case '+':
+                        button.style.cssText = 'background-color: #ff9500; color: white; transition: color 3s ease;';
+                        break;
+                    default:
+                        return;
+                }
+            });
+        }
     });
+
+    
+
+});
+
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.chooseOperation(button.innerText);
+        switch (button.innerText) {
+            case '÷':
+            case '×':
+            case '–':
+            case '+':
+                button.style.cssText = 'background-color: white; color: #ff9500;';
+                break;
+            default:
+                return;
+        }
+    });
+});
+
+equalsButton.addEventListener('click', button => {
+    calculator.compute();
+    calculator.updateDisplay();
+});
+
+clearAllButton.addEventListener('click', button => {
+    calculator.clear();
+    calculator.updateDisplay();
+    display.innerText = 0;
 });
 
 

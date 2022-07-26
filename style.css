@@ -101,14 +101,16 @@ button {
     background-color: #fbfbfb;
 }
 
-.operation {
+.operation,
+.equals {
     background-color: #FF9500;
     color: white;
     font-size: 30px;
     
 }
 
-.operation:hover {
+.operation:hover,
+.equals:hover {
     background-color: #ffbf65;
 }
 
