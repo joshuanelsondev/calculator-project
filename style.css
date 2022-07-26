@@ -89,7 +89,7 @@ button {
 
 .clearAll, 
 .delete,
-.positiveNegative {
+.negate {
     background-color: #D4D4D2;
     color: black;
     font-size: 25px;
@@ -97,31 +97,29 @@ button {
 
 .clearAll:hover,
 .delete:hover,
-.positiveNegative:hover {
+.negate:hover {
     background-color: #fbfbfb;
 }
 
-.operator {
+.operation {
     background-color: #FF9500;
     color: white;
     font-size: 30px;
     
 }
 
-.operator:hover {
+.operation:hover {
     background-color: #ffbf65;
 }
 
-.operand,
-.decimal,
+.number,
 .percent {
     background-color: #505050;
     color: white;
     font-size: 25px;
 }
 
-.operand:hover,
-.decimal:hover,
+.number:hover,
 .percent:hover {
     background-color: #737373;
 }

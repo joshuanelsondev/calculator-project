@@ -10,48 +10,123 @@ function time() {
     document.getElementById('time').innerHTML = time;
 }
 
+class Calculator {
+    constructor(previousOperand, currentOperand) {
+        this.previousOperand = previousOperand;
+        this.currentOperand = currentOperand;
+    }
 
-const display = document.getElementById('display');
-const displayValue = 0;
-display.innerText = displayValue;
-const buttons = Array.from(document.querySelectorAll('button'));
+    clear() {
+        this.currentOperand = '';
+        this.previousOperand = '';
+        this.operation = undefined;
+    }
 
-
-
-updateDisplay = (e) => {
-    switch (e.target.value) {
-        case 'AC':
-            display.innerText = 0;
-            break;
-        case 'C':
-            if (display.innerText != '0'){
-                display.innerText = display.innerText.slice(0, -1);
-            }      
-            break;
-        case 'positiveNegative':
-            display.innerText = '-' + display.innerText;
-            break;
-
-        default:
-            switch (display.innerText) {
-                case '0':
-                    display.innerText = '';
-                    display.innerText += e.target.value;
-                    break;
-                default:
-                    display.innerText = e.target.value + display.innerText;
-            }
-
-            if (display.innerText.length > 11) {
-                display.innerText = display.innerText.slice(0, -1);
-            } else if (display.innerText.length === 3 || display.innerText.length === 7) {
-                display.innerText = e.target.value + ',' + display.innerText;
-            }
+    delete() {
 
     }
-};
 
-buttons.map(button => { button.addEventListener('click', updateDisplay); });
+    appendNumber(number) {
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+
+    }
+
+    chooseOperation(operation) {
+
+    }
+
+    compute() {
+
+    }
+
+    updateDisplay() {
+        this.currentOperand.innerText = this.currentOperand;
+
+    }
+}
+
+
+
+
+const numberButtons = document.querySelectorAll(`[data-number]`);
+const operationButtons = document.querySelectorAll(`[data-operation]`);
+const equalsButton = document.querySelector(`[data-equals]`);
+const clearAllButton = document.querySelector(`[data-clearAll]`);
+const deleteButton = document.querySelector(`[data-delete]`);
+const negateButton = document.querySelector(`[data-negate]`);
+const previousOperand = document.querySelector(`[data-previousOperand]`);
+const currentOperand = document.querySelector(`[data-currentOperand]`);
+
+const calculator = new Calculator(previousOperand, currentOperand);
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.appendNumber(button.innerText);
+        calculator.updateDisplay();
+    });
+});
+
+
+
+
+
+
+
+
+
+
+// const display = document.getElementById('display');
+// let displayValue = '0';
+// display.innerText = displayValue;
+// const buttons = Array.from(document.querySelectorAll('button'));
+// let displayLimit = false;
+
+// updateDisplay = (e) => { 
+    
+//     switch (e.target.value) {
+//         case 'AC':
+//             displayLimit = false;
+//             displayValue = 0;
+//             break;
+//         case 'C':
+//             if (displayValue != '0') {
+//                 displayValue = displayValue.slice(0, -1);
+//                 displayLimit = false;
+//             }
+//             break;
+//         case 'positiveNegative':
+//             displayValue = '-' + displayValue;
+//             break;
+//         default:
+//             switch (displayValue) {
+//                 case '0':
+//                     displayValue = '';
+//                     displayValue += e.target.value;
+//                     break;
+//                 default:
+//                     displayValue += e.target.value;
+                    
+//             }
+            
+//     }
+//     if (displayValue.length >= 9) {
+//        displayLimit = true;
+//     } 
+//     display.innerText = Number(displayValue).toLocaleString();
+    
+    
+// };
+
+// toggleDisplay = () => {
+//     if(displayLimit) {
+//        displayLimit = true;
+//     } else {
+//         displayLimit = false;
+//     }
+//     return displayLimit;
+// };
+
+// buttons.map(button => { button.addEventListener('click', updateDisplay); });
 
 // updateDisplay();
 
