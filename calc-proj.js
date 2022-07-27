@@ -67,9 +67,6 @@ class Calculator {
             case '÷':
                 computation = prev / current;
                 break;
-            case '%':
-                computation = prev / 100;
-                break;
             default:
                 return;
         }
@@ -77,6 +74,8 @@ class Calculator {
         this.operation = undefined;
         this.previousOperand = '';
     }
+
+   
   
     updateDisplay() {
         display.innerText = this.currentOperand;
@@ -93,6 +92,7 @@ const equalsButton = document.querySelector(`[data-equals]`);
 const clearAllButton = document.querySelector(`[data-clearAll]`);
 const deleteButton = document.querySelector(`[data-delete]`);
 const negateButton = document.querySelector(`[data-negate]`);
+const percentButton = document.querySelector(`.percent`);
 const previousNumber = document.querySelector(`[data-previousNumber]`);
 const currentNumber = document.querySelector(`[data-currentNumber]`);
 const display = document.getElementById('display');
@@ -110,16 +110,14 @@ numberButtons.forEach(button => {
                     case '×':
                     case '–':
                     case '+':
-                        button.style.cssText = 'background-color: #ff9500; color: white; transition: color 3s ease;';
+                        button.style.cssText = 'background-color: #ff9500; color: white; transition: color 1s ease;';
                         break;
                     default:
                         return;
                 }
             });
         }
-    });
-
-    
+    }); 
 
 });
 
@@ -148,6 +146,11 @@ clearAllButton.addEventListener('click', button => {
     calculator.clear();
     calculator.updateDisplay();
     display.innerText = 0;
+});
+
+percentButton.addEventListener('click', button => {
+    calculator.percent();
+    calculator.updateDisplay();
 });
 
 

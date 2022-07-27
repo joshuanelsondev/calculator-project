@@ -125,3 +125,8 @@ button {
 .percent:hover {
     background-color: #737373;
 }
+
+#zero {
+    grid-column: span 2;
+    border-radius: 2em;
+}
