@@ -32,11 +32,11 @@ class Calculator {
 
     
     appendNumber(number) {
-        if (number === '.') { number = 0 + number;}
+        if (number === '.' && display.innerText === '0') { number = 0 + number;}
         if (display.innerText.length >= 11 && this.previousOperand === '') return; 
         if (number === '.' && this.currentOperand.includes('.')) return; 
         this.currentOperand = this.currentOperand.toString() + number.toString();
-       
+        
     }
 
     chooseOperation(operation) {
@@ -92,8 +92,8 @@ class Calculator {
         } else {
             return integerDisplay;
         } 
-       
    }
+
   
     updateDisplay() {
         display.innerText = this.getDisplayNumber(this.currentOperand);     
@@ -121,7 +121,6 @@ numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
-        
         if (display != 0) {
             operationButtons.forEach(button => {
                 switch (button.innerText) {
@@ -136,7 +135,7 @@ numberButtons.forEach(button => {
                 }
             });
         }
-       
+       resize();
     }); 
 
 });
@@ -160,24 +159,44 @@ operationButtons.forEach(button => {
 equalsButton.addEventListener('click', button => {
     calculator.compute();
     calculator.updateDisplay();
+    resize();
 });
 
 clearAllButton.addEventListener('click', button => {
     calculator.clear();
     calculator.updateDisplay();
     display.innerText = 0;
+    resize();
 });
 
 deleteButton.addEventListener('click', button => {
     calculator.delete();
     calculator.updateDisplay();
+    resize();
 });
 
 
+// Reduce the font of the digits to fit inside of the display
+function resize() {
+    if (display.innerText.length < 7) {
+        display.style.fontSize = '80px';
+    } else if (display.innerText.length == 7 && display.innerText !== '111,111' ) {
+        display.style.fontSize = '75px';
+    } else if (display.innerText.length == 9 && display.innerText !== '1,111,111') {
+        display.style.fontSize = '65px';
+    } else if (display.innerText.length == 10 && display.innerText !== '11,111,111') {
+        display.style.fontSize = '55px';
+    } else if (display.innerText.length == 11 && display.innerText !== '111,111,111') {
+        display.style.fontSize = '50px';
+    } else if (display.innerText == '111,111,111') {
+        display.style.fontSize = '75px';
+    }
+}
 
 
 
 
+   
 
 
 

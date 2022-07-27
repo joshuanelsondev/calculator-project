@@ -71,12 +71,15 @@ img {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    width: inherit;
+    width: 3.8em;
     height: auto;
-    font-size: 4em;
+    font-size: 80px;
     font-family: system-ui, sans-serif;
     font-weight: 200;
     color: white;
+    position: absolute;
+    top: 70px;
+    right: -1px;
     
 }
 
