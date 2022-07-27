@@ -10,6 +10,7 @@ function time() {
     document.getElementById('time').innerHTML = time;
 }
 
+// create a class for storing the calculator functions
 class Calculator {
     constructor(previousNumber, currentNumber) {
         this.previousNumber = previousNumber;
@@ -26,26 +27,27 @@ class Calculator {
     }
 
     delete() {
-
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
 
+    
     appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return;
+        if (number === '.') { number = 0 + number;}
+        if (display.innerText.length >= 11 && this.previousOperand === '') return; 
+        if (number === '.' && this.currentOperand.includes('.')) return; 
         this.currentOperand = this.currentOperand.toString() + number.toString();
-        
-
+       
     }
 
     chooseOperation(operation) {
-        // if (this.currentOperand === '') return;
-        // if (this.previousOperand !== '') {
-        //     this.compute();
-        // }
+        if (this.currentOperand === '') return;
+        if (this.previousOperand !== '') {
+            this.compute();
+        }
         this.operation = operation;
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';
-        display.innerText = this.previousOperand;
-
+        display.innerText = this.getDisplayNumber(this.previousOperand);
     }
 
     compute() {
@@ -75,16 +77,31 @@ class Calculator {
         this.previousOperand = '';
     }
 
-   
+    getDisplayNumber(number) {
+        const stringNumber = number.toString();
+        const integerDigits = parseFloat(stringNumber.split('.')[0]);
+        const decimalDigits = stringNumber.split('.')[1];
+        let integerDisplay;
+        if (isNaN(integerDigits)) {
+            integerDisplay = '';
+        } else {
+            integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0});
+        }
+        if (decimalDigits != null) {
+            return `${integerDisplay}.${decimalDigits}`;
+        } else {
+            return integerDisplay;
+        } 
+       
+   }
   
     updateDisplay() {
-        display.innerText = this.currentOperand;
-       
+        display.innerText = this.getDisplayNumber(this.currentOperand);     
     }
 }
 
 
- 
+// Button functions and other variables to be used 
 
 const numberButtons = document.querySelectorAll(`[data-number]`);
 const operationButtons = document.querySelectorAll(`[data-operation]`);
@@ -96,13 +113,15 @@ const percentButton = document.querySelector(`.percent`);
 const previousNumber = document.querySelector(`[data-previousNumber]`);
 const currentNumber = document.querySelector(`[data-currentNumber]`);
 const display = document.getElementById('display');
-
 const calculator = new Calculator(previousNumber, currentNumber);
 
+
+// Button event listeners
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
+        
         if (display != 0) {
             operationButtons.forEach(button => {
                 switch (button.innerText) {
@@ -117,6 +136,7 @@ numberButtons.forEach(button => {
                 }
             });
         }
+       
     }); 
 
 });
@@ -148,8 +168,8 @@ clearAllButton.addEventListener('click', button => {
     display.innerText = 0;
 });
 
-percentButton.addEventListener('click', button => {
-    calculator.percent();
+deleteButton.addEventListener('click', button => {
+    calculator.delete();
     calculator.updateDisplay();
 });
 
@@ -158,68 +178,6 @@ percentButton.addEventListener('click', button => {
 
 
 
-
-
-
-
-// const display = document.getElementById('display');
-// let displayValue = '0';
-// display.innerText = displayValue;
-// const buttons = Array.from(document.querySelectorAll('button'));
-// let displayLimit = false;
-
-// updateDisplay = (e) => { 
-    
-//     switch (e.target.value) {
-//         case 'AC':
-//             displayLimit = false;
-//             displayValue = 0;
-//             break;
-//         case 'C':
-//             if (displayValue != '0') {
-//                 displayValue = displayValue.slice(0, -1);
-//                 displayLimit = false;
-//             }
-//             break;
-//         case 'positiveNegative':
-//             displayValue = '-' + displayValue;
-//             break;
-//         default:
-//             switch (displayValue) {
-//                 case '0':
-//                     displayValue = '';
-//                     displayValue += e.target.value;
-//                     break;
-//                 default:
-//                     displayValue += e.target.value;
-                    
-//             }
-            
-//     }
-//     if (displayValue.length >= 9) {
-//        displayLimit = true;
-//     } 
-//     display.innerText = Number(displayValue).toLocaleString();
-    
-    
-// };
-
-// toggleDisplay = () => {
-//     if(displayLimit) {
-//        displayLimit = true;
-//     } else {
-//         displayLimit = false;
-//     }
-//     return displayLimit;
-// };
-
-// buttons.map(button => { button.addEventListener('click', updateDisplay); });
-
-// updateDisplay();
-
-// clear = () => {
-
-// };
 
 
 
