@@ -24,6 +24,9 @@ class Calculator {
         this.previousOperand = '';
         this.operation = undefined;
         
+    
+        
+        
         
     }
 
@@ -197,10 +200,11 @@ equalsButton.addEventListener('click', button => {
 });
 
 clearAllButton.addEventListener('click', button => {
-    calculator.clear();
+    calculator.clear();    
     calculator.updateDisplay();
-    display.innerText = 0;
+    displayReset();
     resize();
+    
     equated = false;
     operationButtons.forEach(button => {
                 switch (button.innerText) {
@@ -222,6 +226,9 @@ deleteButton.addEventListener('click', button => {
     resize();
     if (display.innerText.length == 0) {
         display.innerText = 0;
+    }
+    if (display.innerText == '0') { 
+        displayReset(); 
     }
 });
 
@@ -249,6 +256,13 @@ function resize() {
     } else if (display.innerText == '111,111,111') {
         display.style.fontSize = '75px';
     } 
+}
+
+function displayReset() {
+    display.style.removeProperty('font-size');
+    display.style.removeProperty('top');
+    display.style.removeProperty('left');
+    display.innerText = '0';
 }
 
 
