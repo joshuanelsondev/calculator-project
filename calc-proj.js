@@ -24,6 +24,7 @@ class Calculator {
         this.previousOperand = '';
         this.operation = undefined;
         
+        
     }
 
     delete() {
@@ -31,9 +32,10 @@ class Calculator {
     }
 
     appendNumber(number) {
+     
         if (this.currentOperand == '') {
             display.innerText = number;
-        }
+        } 
         if (number === '.' && display.innerText === '0') { number = 0 + number;}
         if ((display.innerText.length == 11 && !display.innerText.includes('-')) && this.previousOperand === '') return; 
         if ((display.innerText.length > 11 && display.innerText.includes('-')) || (display.innerText.length > 10 && !display.innerText.includes('-'))) return;
@@ -85,11 +87,8 @@ class Calculator {
             default:
                 return;
         }
-        if (display.innerText.length > 12) {
-            computation = Number(computation).toExponential(3);
-        }
+        
         this.currentOperand = computation;
-        this.currentOperand = this.currentOperand.toExponential(5);
         this.operation = undefined;
         this.previousOperand = '';
     }
@@ -115,7 +114,14 @@ class Calculator {
         if (display.innerText.includes('e')) {
             display.style.fontSize = 'xx-large';
         }
-        display.innerText = this.getDisplayNumber(this.currentOperand); 
+        if (this.currentOperand.toString().length > 12) {
+            this.currentOperand = this.currentOperand.toExponential(5);
+            display.innerText = this.currentOperand;
+        } else {
+            display.innerText = this.getDisplayNumber(this.currentOperand); 
+        }
+       
+        
             
     }
 }
@@ -134,11 +140,15 @@ const previousNumber = document.querySelector(`[data-previousNumber]`);
 const currentNumber = document.querySelector(`[data-currentNumber]`);
 const display = document.getElementById('display');
 const calculator = new Calculator(previousNumber, currentNumber);
+let equated = false;
 
 
 // Button event listeners
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
+        if (equated == true) {
+            calculator.clear();
+        }
         calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
         if (display != 0) {
@@ -155,6 +165,7 @@ numberButtons.forEach(button => {
                 }
             });
         }
+       
        resize();
     }); 
 
@@ -180,6 +191,7 @@ equalsButton.addEventListener('click', button => {
     calculator.compute();
     calculator.updateDisplay();
     resize(); 
+    equated = true;
 });
 
 clearAllButton.addEventListener('click', button => {
@@ -187,6 +199,19 @@ clearAllButton.addEventListener('click', button => {
     calculator.updateDisplay();
     display.innerText = 0;
     resize();
+    equated = false;
+    operationButtons.forEach(button => {
+                switch (button.innerText) {
+                    case '÷':
+                    case '×':
+                    case '–':
+                    case '+':
+                        button.style.cssText = 'background-color: #ff9500; color: white; transition: color 1s ease;';
+                        break;
+                    default:
+                        return;
+                }
+    });
 });
 
 deleteButton.addEventListener('click', button => {
