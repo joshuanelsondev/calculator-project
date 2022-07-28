@@ -132,4 +132,11 @@ button {
 #zero {
     grid-column: span 2;
     border-radius: 2em;
+    position: relative;
+}
+
+.zero {
+    position: absolute;
+    left: 25px;
+    top: 15px;
 }

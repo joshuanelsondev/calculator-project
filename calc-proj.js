@@ -30,12 +30,25 @@ class Calculator {
         this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
 
-    
     appendNumber(number) {
+        if (this.currentOperand == '') {
+            display.innerText = number;
+        }
         if (number === '.' && display.innerText === '0') { number = 0 + number;}
-        if (display.innerText.length >= 11 && this.previousOperand === '') return; 
+        if ((display.innerText.length == 11 && !display.innerText.includes('-')) && this.previousOperand === '') return; 
+        if ((display.innerText.length > 11 && display.innerText.includes('-')) || (display.innerText.length > 10 && !display.innerText.includes('-'))) return;
         if (number === '.' && this.currentOperand.includes('.')) return; 
+
         this.currentOperand = this.currentOperand.toString() + number.toString();
+        
+    }
+
+    negate() {
+        this.currentOperand = '-' + this.currentOperand;
+        if (!display.innerText.includes('-')) {
+            display.innerText = this.currentOperand;
+        }
+        
         
     }
 
@@ -72,7 +85,11 @@ class Calculator {
             default:
                 return;
         }
+        if (display.innerText.length > 12) {
+            computation = Number(computation).toExponential(3);
+        }
         this.currentOperand = computation;
+        this.currentOperand = this.currentOperand.toExponential(5);
         this.operation = undefined;
         this.previousOperand = '';
     }
@@ -94,9 +111,12 @@ class Calculator {
         } 
    }
 
-  
     updateDisplay() {
-        display.innerText = this.getDisplayNumber(this.currentOperand);     
+        if (display.innerText.includes('e')) {
+            display.style.fontSize = 'xx-large';
+        }
+        display.innerText = this.getDisplayNumber(this.currentOperand); 
+            
     }
 }
 
@@ -159,7 +179,7 @@ operationButtons.forEach(button => {
 equalsButton.addEventListener('click', button => {
     calculator.compute();
     calculator.updateDisplay();
-    resize();
+    resize(); 
 });
 
 clearAllButton.addEventListener('click', button => {
@@ -173,6 +193,13 @@ deleteButton.addEventListener('click', button => {
     calculator.delete();
     calculator.updateDisplay();
     resize();
+    if (display.innerText.length == 0) {
+        display.innerText = 0;
+    }
+});
+
+negateButton.addEventListener('click', button => {
+    calculator.negate();
 });
 
 
@@ -188,9 +215,13 @@ function resize() {
         display.style.fontSize = '55px';
     } else if (display.innerText.length == 11 && display.innerText !== '111,111,111') {
         display.style.fontSize = '50px';
+    } else if (display.innerText.length == 12) {
+        display.style.fontSize = '45px';
+    } else if (display.innerText.length > 12) {
+        display.style.fontSize = '38px';   
     } else if (display.innerText == '111,111,111') {
         display.style.fontSize = '75px';
-    }
+    } 
 }
 
 
