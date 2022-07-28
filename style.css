@@ -140,3 +140,18 @@ button {
     left: 25px;
     top: 15px;
 }
+
+footer {
+    color: white;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #FF9500;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #FF9500;
+}
