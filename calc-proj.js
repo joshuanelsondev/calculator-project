@@ -56,9 +56,7 @@ class Calculator {
 
     chooseOperation(operation) {
         if (this.currentOperand === '') return;
-        if (this.previousOperand !== '') {
-            this.compute();
-        }
+        if (this.previousOperand !== '') { this.compute(); }
         this.operation = operation;
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';
@@ -114,13 +112,17 @@ class Calculator {
         if (display.innerText.includes('e')) {
             display.style.fontSize = 'xx-large';
         }
+    
         if (this.currentOperand.toString().length > 12) {
             this.currentOperand = this.currentOperand.toExponential(5);
             display.innerText = this.currentOperand;
         } else {
             display.innerText = this.getDisplayNumber(this.currentOperand); 
         }
-       
+        if (display.innerText == '∞') {
+            display.innerText = 'Now you know better...';
+            display.style.cssText = 'font-size: 38px; position: absolute; top: 2px; left: 2px;';
+        }
         
             
     }
