@@ -221,6 +221,9 @@ clearAllButton.addEventListener('click', button => {
 });
 
 deleteButton.addEventListener('click', button => {
+    if (equated == true) {
+        calculator.clear();
+    }
     calculator.delete();
     calculator.updateDisplay();
     resize();
@@ -230,6 +233,7 @@ deleteButton.addEventListener('click', button => {
     if (display.innerText == '0') { 
         displayReset(); 
     }
+    
 });
 
 negateButton.addEventListener('click', button => {
@@ -241,11 +245,11 @@ negateButton.addEventListener('click', button => {
 function resize() {
     if (display.innerText.length < 7) {
         display.style.fontSize = '80px';
-    } else if (display.innerText.length == 7 && display.innerText !== '111,111' ) {
-        display.style.fontSize = '75px';
-    } else if (display.innerText.length == 9 && display.innerText !== '1,111,111') {
+    } else if (display.innerText.length <= 7 && display.innerText !== '111,111' ) {
+        display.style.fontSize = '70px';
+    } else if (display.innerText.length <= 8 && display.innerText !== '1,111,111') {
         display.style.fontSize = '65px';
-    } else if (display.innerText.length == 10 && display.innerText !== '11,111,111') {
+    } else if (display.innerText.length <= 9 && display.innerText !== '11,111,111') {
         display.style.fontSize = '55px';
     } else if (display.innerText.length == 11 && display.innerText !== '111,111,111') {
         display.style.fontSize = '50px';
